@@ -3,10 +3,8 @@
 # =========================
 import os
 
-os.environ["TF_USE_LEGACY_KERAS"] = "1"
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
-
 # =========================
 # CORE LIBRARIES
 # =========================
@@ -64,11 +62,13 @@ scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
 
 cols = joblib.load(os.path.join(MODEL_DIR, "feature_columns.pkl"))
 
-dl_model = tf.keras.models.load_model(
-    os.path.join(MODEL_DIR, "dl_model.keras"),
-    compile=False
-)
+from keras.models import load_model
 
+dl_model = load_model(
+    os.path.join(MODEL_DIR, "dl_model.keras"),
+    compile=False,
+    safe_mode=False
+)
 # =========================
 # FEATURE MAP
 # =========================
