@@ -1,66 +1,67 @@
+# =========================
+# ENV SETTINGS (MUST BE FIRST)
+# =========================
 import os
+
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
+# =========================
+# CORE LIBRARIES
+# =========================
 import warnings
 import logging
-
-# =========================
-# 🔥 ENV SETTINGS (MUST BE FIRST)
-# =========================
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
-
-warnings.filterwarnings("ignore")
-logging.getLogger("tensorflow").setLevel("ERROR")
-
-# =========================
-# 🔥 CORE LIBRARIES
-# =========================
 import json
 import numpy as np
 import streamlit as st
 import joblib
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+
 from datetime import datetime
 from io import BytesIO
 
+warnings.filterwarnings("ignore")
+logging.getLogger("tensorflow").setLevel("ERROR")
+
 # =========================
-# 🔥 TENSORFLOW (LOAD ONCE ONLY)
+# TENSORFLOW
 # =========================
 import tensorflow as tf
+
 tf.get_logger().setLevel("ERROR")
 
 # =========================
-# 🔥 REPORTLAB (PDF GENERATION)
+# REPORTLAB (PDF GENERATION)
 # =========================
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
 
 # =========================
-# 🔥 STREAMLIT COMPONENTS
+# STREAMLIT COMPONENTS
 # =========================
 import streamlit.components.v1 as components
 
 # =========================
 # PATHS
 # =========================
-
-
-
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# FIX: models folder is in SAME directory as app.py
 MODEL_DIR = os.path.join(BASE_DIR, "models")
 
 USER_FILE = os.path.join(BASE_DIR, "users.json")
 HISTORY_FILE = os.path.join(BASE_DIR, "user_history.json")
 
 print("MODEL_DIR:", MODEL_DIR)
+
 # =========================
-# LOAD MODELS (FIXED PATHS)
+# LOAD MODELS
 # =========================
 rf = joblib.load(os.path.join(MODEL_DIR, "random_forest.pkl"))
+
 scaler = joblib.load(os.path.join(MODEL_DIR, "scaler.pkl"))
+
 cols = joblib.load(os.path.join(MODEL_DIR, "feature_columns.pkl"))
 
 dl_model = tf.keras.models.load_model(
