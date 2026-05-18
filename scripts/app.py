@@ -273,7 +273,7 @@ if page == "Home":
     with col2:
         st.image(
             "https://healthindustrytrends.com/wp-content/uploads/2024/11/revolutionizing-remote-patient-care-with-iot-technology.png",
-            use_container_width=True
+            use_column_width=True
         )
 
     st.markdown("---")
