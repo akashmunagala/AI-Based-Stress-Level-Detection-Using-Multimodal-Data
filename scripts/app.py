@@ -269,11 +269,12 @@ if page == "Home":
 
     # 🔥 CENTER IMAGE (CLEAN SaaS STYLE)
     col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    st.image(
-        "https://healthindustrytrends.com/wp-content/uploads/2024/11/revolutionizing-remote-patient-care-with-iot-technology.png",
-        use_column_width=True
-    )
+
+    with col2:
+        st.image(
+            "https://healthindustrytrends.com/wp-content/uploads/2024/11/revolutionizing-remote-patient-care-with-iot-technology.png",
+            use_container_width=True
+        )
 
     st.markdown("---")
 
@@ -792,7 +793,7 @@ elif page == "Stress":
                 }
             ))
             
-            st.plotly_chart(fig, width='stretch')
+            st.plotly_chart(fig, use_container_width=True)
 
             # 🔥 STRESS BAR (DIRECTLY BELOW GAUGE)
             
